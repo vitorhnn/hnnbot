@@ -9,10 +9,14 @@ import com.sedmelluq.discord.lavaplayer.track.{AudioTrack, AudioTrackEndReason}
 class TrackScheduler(var player: AudioPlayer) extends AudioEventAdapter {
   var queue: BlockingQueue[AudioTrack] = new LinkedBlockingQueue[AudioTrack]
 
-  def queue(track: AudioTrack): Unit = {
+  def enqueue(track: AudioTrack): Unit = {
     if (!player.startTrack(track, true)) {
       queue.offer(track)
     }
+  }
+
+  def clearQueue(): Unit = {
+    queue.clear()
   }
 
   override def onTrackEnd(player: AudioPlayer,

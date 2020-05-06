@@ -57,12 +57,18 @@ class GlobalMusicManager() {
     guild.getAudioManager.closeAudioConnection()
   }
 
+  def clearQueue(guild: Guild): Unit = {
+    val musicManager = getGuildAudioPlayer(guild)
+    musicManager.scheduler.clearQueue()
+  }
+
   def leaveIfEmpty(channel: VoiceChannel): Unit = {
     val guild = channel.getGuild
 
     if (guild.getAudioManager.getConnectedChannel == channel) {
       if (channel.getMembers.size() == 1) {
         disconnect(guild)
+        clearQueue(guild)
       }
     }
   }
@@ -77,7 +83,7 @@ class GlobalMusicManager() {
 
   private def connectToVoiceChannel(guild: Guild, channel: VoiceChannel): Unit = guild.getAudioManager.openAudioConnection(channel)
 
-  private def enqueueTrack(musicManager: GuildMusicManager, track: AudioTrack): Unit = musicManager.scheduler.queue(track)
+  private def enqueueTrack(musicManager: GuildMusicManager, track: AudioTrack): Unit = musicManager.scheduler.enqueue(track)
 
   def skipTrack(guild: Guild): Unit = {
     val musicManager = getGuildAudioPlayer(guild)

@@ -10,6 +10,7 @@ class StopCommand(val bot: CommandDispatcher) extends Command {
     val guild = event.getGuild
 
     bot.globalMusicManager.disconnect(guild)
+    bot.globalMusicManager.clearQueue(guild)
 
     event.getChannel.sendMessage("Leaving channel, goodbye!").queue()
   }
