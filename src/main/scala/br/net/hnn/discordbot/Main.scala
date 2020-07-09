@@ -10,16 +10,16 @@ object Main {
   def main(args: Array[String]): Unit = {
     val dotenv = Dotenv.configure().ignoreIfMissing().load()
 
-    val bot = new CommandDispatcher(new SpotifyAPIWrapper(dotenv.get("SPOTIFY_ID"), dotenv.get("SPOTIFY_SECRET")))
+    val commandDispatcher = new CommandDispatcher(new SpotifyAPIWrapper(dotenv.get("SPOTIFY_ID"), dotenv.get("SPOTIFY_SECRET")))
 
-    bot.registerCommand(new PlayCommand(bot))
-    bot.registerCommand(new SpotifyAlbumCommand(bot))
-    bot.registerCommand(new StopCommand(bot))
-    bot.registerCommand(new BoaNoiteCommand(bot))
+    commandDispatcher.registerCommand(new PlayCommand(commandDispatcher))
+    commandDispatcher.registerCommand(new SpotifyAlbumCommand(commandDispatcher))
+    commandDispatcher.registerCommand(new StopCommand(commandDispatcher))
+    commandDispatcher.registerCommand(new BoaNoiteCommand(bot))
 
     new JDABuilder(AccountType.BOT)
       .setToken(dotenv.get("BOT_TOKEN"))
-      .addEventListeners(bot)
+      .addEventListeners(commandDispatcher)
       .setActivity(Activity.listening(dotenv.get("ACTIVITY")))
       .build()
   }
