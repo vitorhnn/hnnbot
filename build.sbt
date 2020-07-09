@@ -12,9 +12,9 @@ scalaVersion := "2.13.1"
 
 resolvers += Resolver.jcenterRepo
 
-libraryDependencies += "net.dv8tion" % "JDA" % "4.0.0_68"
+libraryDependencies += "net.dv8tion" % "JDA" % "4.1.1_165"
 
-libraryDependencies += "com.sedmelluq" % "lavaplayer" % "1.3.47"
+libraryDependencies += "com.sedmelluq" % "lavaplayer" % "1.3.50"
 
 libraryDependencies += "io.github.cdimascio" % "java-dotenv" % "5.1.3"
 
