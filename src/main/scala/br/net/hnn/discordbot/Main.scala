@@ -15,6 +15,7 @@ object Main {
     bot.registerCommand(new PlayCommand(bot))
     bot.registerCommand(new SpotifyAlbumCommand(bot))
     bot.registerCommand(new StopCommand(bot))
+    bot.registerCommand(new BoaNoiteCommand(bot))
 
     new JDABuilder(AccountType.BOT)
       .setToken(dotenv.get("BOT_TOKEN"))
